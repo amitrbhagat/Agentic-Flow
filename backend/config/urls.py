@@ -38,4 +38,9 @@ urlpatterns = [
         include("knowledge.urls")
     ),
 
+    path(
+        "api/agents/",
+        include("agents.urls")
+    ),
+
 ]
