@@ -1,40 +1,46 @@
 from django.db import models
+
 from workflows.models import Workflow
 
-class ExecutionRun(models.Model):
 
-    STATUS_CHOICES = (
+class Execution(models.Model):
+
+    STATUS_CHOICES = [
         ("PENDING", "Pending"),
         ("RUNNING", "Running"),
-        ("SUCCESS", "Success"),
+        ("COMPLETED", "Completed"),
         ("FAILED", "Failed"),
-    )
+    ]
 
     workflow = models.ForeignKey(
         Workflow,
         on_delete=models.CASCADE,
-        related_name='runs'
+        related_name="executions"
     )
 
-    status  = models.CharField(max_length = 20, choices= STATUS_CHOICES, default='PENDING')
+    input_data = models.TextField()
 
-    started_at = models.DateTimeField(auto_now_add=True)
-    completed_at = models.DateTimeField(null=True, blank=True)
-
-    def __str__(self):
-        return f"Run {self.id} - {self.workflow.name}"
-
-
-
-class ExecutionLog(models.Model):
-    run = models.ForeignKey(
-        ExecutionRun,
-        on_delete=models.CASCADE,
-        related_name='logs'
+    output_data = models.TextField(
+        blank=True,
+        null=True
     )
 
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="PENDING"
+    )
+
+    started_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    completed_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
-        return f"Log {self.id}"
+        return f"{self.workflow.name} - {self.status}"
+    
+    

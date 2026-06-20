@@ -43,4 +43,9 @@ urlpatterns = [
         include("agents.urls")
     ),
 
+    path(
+        "api/execution/",
+        include("execution.urls")
+    ),
+
 ]

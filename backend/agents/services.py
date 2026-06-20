@@ -4,10 +4,10 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 
-def generate_rsponse(prompt):
+def generate_response(prompt):
 
     payload = {
-        "model": "deepseek-r1:1.5b",
+        "model": "llama3.2:1b",
         "prompt": prompt,
         "stream": False
     }
@@ -15,7 +15,7 @@ def generate_rsponse(prompt):
     response = requests.post(
         OLLAMA_URL,
         json=payload
-    ),
+    )
 
     return response.json()["response"]
    

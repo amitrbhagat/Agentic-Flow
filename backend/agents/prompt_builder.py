@@ -1,12 +1,11 @@
 
 def build_prompt(query, documents):
-    
     context = "\n".join(documents)
 
-    prompt = f"""
-You are an AI assistant.
+    return f"""
+You are a helpful assistant.
 
-Answer the user's question ONLY using the provided context.
+Use only the provided context.
 
 Context:
 {context}
@@ -14,7 +13,6 @@ Context:
 Question:
 {query}
 
-Answer:
+Give a short and direct answer.
 """
 
-    return prompt
