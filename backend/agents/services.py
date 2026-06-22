@@ -17,5 +17,8 @@ def generate_response(prompt):
         json=payload
     )
 
-    return response.json()["response"]
-   
+    data = response.json()
+
+    print(data)
+
+    return data["response"]
