@@ -1,12 +1,51 @@
-import Workflows from "./pages/Workflows"
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
+import Dashboard from "./pages/Dashboard";
+
+import Chat from "./pages/Chat";
+
 import Knowledge from "./pages/Knowledge";
-import Chat from "./pages/chat";
+
 import Executions from "./pages/Executions";
 
 function App() {
+
   return (
-    <Executions />
-  )
+
+    <BrowserRouter>
+
+      <Routes>
+
+        <Route
+          path="/"
+          element={<Dashboard />}
+        >
+
+          <Route
+            path="chat"
+            element={<Chat />}
+          />
+
+          <Route
+            path="knowledge"
+            element={<Knowledge />}
+          />
+
+          <Route
+            path="executions"
+            element={<Executions />}
+          />
+
+        </Route>
+
+      </Routes>
+
+    </BrowserRouter>
+  );
 }
 
 export default App;
