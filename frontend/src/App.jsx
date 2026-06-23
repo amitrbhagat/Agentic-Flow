@@ -1,10 +1,12 @@
 import {
-  BrowserRouter,
-  Routes,
-  Route
+    BrowserRouter,
+    Routes,
+    Route
 } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
+
+import Home from "./pages/Home";
 
 import Chat from "./pages/Chat";
 
@@ -12,40 +14,47 @@ import Knowledge from "./pages/Knowledge";
 
 import Executions from "./pages/Executions";
 
+
+
 function App() {
 
-  return (
+    return (
 
-    <BrowserRouter>
+        <BrowserRouter>
 
-      <Routes>
+            <Routes>
 
-        <Route
-          path="/"
-          element={<Dashboard />}
-        >
+                <Route
+                    path="/"
+                    element={<Dashboard />}
+                >
 
-          <Route
-            path="chat"
-            element={<Chat />}
-          />
+                    <Route
+                        index
+                        element={<Home />}
+                    />
 
-          <Route
-            path="knowledge"
-            element={<Knowledge />}
-          />
+                    <Route
+                        path="chat"
+                        element={<Chat />}
+                    />
 
-          <Route
-            path="executions"
-            element={<Executions />}
-          />
+                    <Route
+                        path="knowledge"
+                        element={<Knowledge />}
+                    />
 
-        </Route>
+                    <Route
+                        path="executions"
+                        element={<Executions />}
+                    />
 
-      </Routes>
+                </Route>
 
-    </BrowserRouter>
-  );
+            </Routes>
+
+        </BrowserRouter>
+    );
 }
 
 export default App;

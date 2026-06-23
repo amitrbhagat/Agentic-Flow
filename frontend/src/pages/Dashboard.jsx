@@ -10,6 +10,12 @@ function Dashboard() {
 
             <nav>
 
+                <Link to="/">
+                    Home
+                </Link>
+
+                {" | "}
+
                 <Link to="/chat">
                     Chat
                 </Link>
