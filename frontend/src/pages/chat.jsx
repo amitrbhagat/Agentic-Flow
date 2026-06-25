@@ -1,14 +1,10 @@
 import { useState } from "react";
-
 import { askAgent } from "../services/chatService";
-
 
 function Chat() {
 
     const [query, setQuery] = useState("");
-
     const [answer, setAnswer] = useState("");
-
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -36,22 +32,32 @@ function Chat() {
     };
 
     return (
-        <div>
 
-            <h1>Agent Chat</h1>
+        <div className="container mt-4">
 
-            <form onSubmit={handleSubmit}>
+            <h1 className="mb-4">
+                Agent Chat
+            </h1>
 
-                <input type="text"
+            <form
+                onSubmit={handleSubmit}
+                className="d-flex gap-2"
+            >
+
+                <input
+                    type="text"
+                    className="form-control"
                     placeholder="Ask a question..."
                     value={query}
-                    onChange={(e) =>
-                        setQuery(e.target.value)
-                    }
+                    onChange={(e) => setQuery(e.target.value)}
                 />
 
-                <button type="submit">
-                    send
+                <button
+                    className="btn btn-primary"
+                    type="submit"
+                    disabled={loading}
+                >
+                    {loading ? "Thinking..." : "Send"}
                 </button>
 
             </form>
@@ -59,16 +65,39 @@ function Chat() {
             <hr />
 
             {
-                loading && <p>Thinking...</p>
+                loading && (
+                    <div className="alert alert-info">
+                        Agent is thinking...
+                    </div>
+                )
             }
 
-            <h3>Answer</h3>
+            <div className="card shadow-sm">
 
-            <pre>{answer}</pre>
+                <div className="card-header">
+                    Answer
+                </div>
+
+                <div className="card-body">
+
+                    {
+                        answer ? (
+                            <p className="mb-0">
+                                {answer}
+                            </p>
+                        ) : (
+                            <p className="text-muted mb-0">
+                                Ask a question to get started.
+                            </p>
+                        )
+                    }
+
+                </div>
+
+            </div>
 
         </div>
-    )
-};
-
+    );
+}
 
 export default Chat;

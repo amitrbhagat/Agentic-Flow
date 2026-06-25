@@ -6,37 +6,58 @@ function Dashboard() {
 
         <div>
 
-            <h1>Agentic Flow</h1>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <nav>
+                <div className="container">
 
-                <Link to="/">
-                    Home
-                </Link>
+                    <Link
+                        className="navbar-brand"
+                        to="/"
+                    >
+                        Agentic Flow
+                    </Link>
 
-                {" | "}
+                    <div className="navbar-nav">
 
-                <Link to="/chat">
-                    Chat
-                </Link>
+                        <Link
+                            className="nav-link"
+                            to="/"
+                        >
+                            Home
+                        </Link>
 
-                {" | "}
+                        <Link
+                            className="nav-link"
+                            to="/chat"
+                        >
+                            Chat
+                        </Link>
 
-                <Link to="/knowledge">
-                    Knowledge
-                </Link>
+                        <Link
+                            className="nav-link"
+                            to="/knowledge"
+                        >
+                            Knowledge
+                        </Link>
 
-                {" | "}
+                        <Link
+                            className="nav-link"
+                            to="/executions"
+                        >
+                            Executions
+                        </Link>
 
-                <Link to="/executions">
-                    Executions
-                </Link>
+                    </div>
+
+                </div>
 
             </nav>
 
-            <hr />
+            <div className="container mt-4">
 
-            <Outlet />
+                <Outlet />
+
+            </div>
 
         </div>
     );

@@ -1,70 +1,113 @@
 import { getExecutions } from "../services/executionService";
-
 import { useState, useEffect } from "react";
-
 
 function Executions() {
 
     const [executions, setExecutions] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         loadExecutions();
-
     }, []);
 
     const loadExecutions = async () => {
 
-        const data = await getExecutions();
+        try {
 
-        console.log(data);
+            const data = await getExecutions();
 
+            console.log(data);
 
-        setExecutions(data);
+            setExecutions(data);
+
+        } catch (error) {
+
+            console.error(error);
+
+        } finally {
+
+            setLoading(false);
+        }
     };
 
     return (
 
-        <div>
+        <div className="container mt-4">
 
-            <h1>Execution Dashboard</h1>
+            <h1 className="mb-4">
+                Execution Dashboard
+            </h1>
 
-            <table border="1">
+            <div className="card shadow-sm">
 
-                <thead>
+                <div className="card-header">
+                    Workflow Executions
+                </div>
 
-                    <tr>
-                        <th>ID</th>
-                        <th>Status</th>
-                        <th>Started</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
+                <div className="card-body">
 
                     {
-                        executions.map((execution) => (
+                        loading ? (
 
-                            <tr key={execution.id}>
+                            <div className="alert alert-info">
+                                Loading executions...
+                            </div>
 
-                                <td>{execution.id}</td>
+                        ) : executions.length === 0 ? (
 
-                                <td>{execution.status}</td>
+                            <div className="alert alert-warning">
+                                No executions found.
+                            </div>
 
-                                <td>{execution.started_at}</td>
+                        ) : (
 
-                            </tr>
-                        ))
+                            <div className="table-responsive">
+
+                                <table className="table table-striped table-hover table-bordered">
+
+                                    <thead className="table-dark">
+
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Status</th>
+                                            <th>Started</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        {
+                                            executions.map((execution) => (
+
+                                                <tr key={execution.id}>
+
+                                                    <td>{execution.id}</td>
+
+                                                    <td>{execution.status}</td>
+
+                                                    <td>{execution.started_at}</td>
+
+                                                </tr>
+
+                                            ))
+                                        }
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        )
                     }
 
-                </tbody>
+                </div>
 
-            </table>
+            </div>
 
         </div>
     );
 }
-
 
 export default Executions;
